@@ -17,6 +17,7 @@ public class Main {
 				num = num + j - i;
 				i++;
 				System.out.println(num + " ");
+				
 			}	
 		}
 	}
