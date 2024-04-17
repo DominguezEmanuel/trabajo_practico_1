@@ -11,12 +11,12 @@ public class Main {
 			if (cambio == true) {
 				prod = i * j;
 				num = num + prod;
-				System.out.println(num+ " ");
+				System.out.print(num+ " ");
 				cambio = false;
 			}else {
 				num = num + j - i;
 				i++;
-				System.out.println(num + " ");
+				System.out.print(num + " ");
 				
 			}	
 		}

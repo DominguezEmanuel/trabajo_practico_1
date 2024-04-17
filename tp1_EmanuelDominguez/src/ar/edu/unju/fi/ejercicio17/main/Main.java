@@ -23,19 +23,15 @@ public class Main {
 		
 		do {
 			verificacion = false;
-			try {
-				while (verificacion == false) {
-					opcion = menu(scanner);
-					if (opcion >= 1 && opcion <= 8) {
-						verificacion = true;
-					}else {
-						System.out.println("Debe escoger una opcion valida");
-					}
+			while (verificacion == false) {
+				opcion = menu(scanner);
+				if (opcion >= 1 && opcion <= 8) {
+					verificacion = true;
+				}else {
+					System.out.println("Debe escoger una opcion valida");
+					scanner.nextLine();
 				}
-			}catch(InputMismatchException e) {
-				System.out.println("Debe ingresar un numero");
 			}
-			scanner.nextLine();
 			switch (opcion) {
 		    case 1:
 		    	try {
@@ -50,7 +46,7 @@ public class Main {
 					LocalDate fechaNacimiento = LocalDate.parse(fechaNac,formatter);
 					System.out.println("Ingrese nacionalidad: ");
 					String nacionalidad = scanner.nextLine();
-					System.out.println("Ingrese estatura: ");
+					System.out.println("Ingrese estatura Ej:1,70 ");
 					Double estatura = scanner.nextDouble();
 					System.out.println("Ingrese peso: ");
 					Double peso = scanner.nextDouble();
@@ -157,7 +153,7 @@ public class Main {
 		        System.out.println("Opción Invalida");
 		        break;
 		}
-			scanner.nextLine(); 
+		scanner.nextLine(); 
 		}while(opcion != 8);
 
 	}
@@ -174,9 +170,16 @@ public class Main {
 		System.out.println("7-Mostrar cantidad de Jugadores de una nacionalidad");
 		System.out.println("8-Salir del Programa");
 		System.out.println("");
-		System.out.println("¿Que opcion elige? ");
-		eleccion = scanner.nextInt();
-		return eleccion;
+		try {
+			System.out.println("¿Que opcion elige? ");
+			eleccion = scanner.nextInt();
+			scanner.nextLine();
+			return eleccion;
+		}catch(Exception e){
+			System.out.println("Debe ingresar un numero");
+			scanner.nextLine();
+			return 0;
+		}
 	}
 	
 	public static void MostrarJugador(List<Jugador> lista, String nombre, String apellido) {
@@ -213,10 +216,8 @@ public class Main {
 	        		modificacion = true;
 	        	}else {
 	        		System.out.println("Debe escoger una opcion valida");
-	        	}
+	        		scanner.nextLine();	        	}
         	}
-        	
-        	scanner.nextLine();
         	
         	if (modificacion == true) {
         		switch(opcionModificar) {
@@ -253,7 +254,7 @@ public class Main {
         			
         		case 5:
         			try {
-	        			System.out.println("Ingrese nueva Estatura: ");
+        				System.out.println("Ingrese nueva estatura Ej:1,70 ");
 	        			Double nuevaEstatura = scanner.nextDouble();
 	        			lista.get(jugadorModificado).setEstaturaJugador(nuevaEstatura);
         			}catch(InputMismatchException e) {
@@ -301,11 +302,15 @@ public class Main {
 		try{
 			System.out.println("¿Que opcion elige? ");
 			opcion = scanner.nextInt();
+			scanner.nextLine();
+			return opcion;
 		}catch(InputMismatchException e) {
 			System.out.println("Error: opcion erronea");
+			scanner.nextLine();
+			return 0;
+			
 		}
 		
-		return opcion;
 	}
 	
 	public static Boolean verificarJugador(List<Jugador> lista, String nombre, String apellido) {
